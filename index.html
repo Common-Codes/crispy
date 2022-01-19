@@ -1,19 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crispy</title>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <link rel="stylesheet" href="landing.css">
-    <script type="text/javascript" src="index.js"></script>
+    <title>Crispy Login</title>
     <meta name="description" content="Crispy - Open Source Chat powered by Firebase">
     <meta name="keywords" content="online, chat, open source. crispy">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="https://media.discordapp.net/attachments/820694631066632202/933288358384398336/avatarfusion.png">
+    <link rel="stylesheet" href="landing.css" />
 </head>
 <body>
-    
+
+  <div id="login_div" class="main-div">
+    <h3 style="color: aliceblue;">Crispy Login</h3>
+    <input type="email" placeholder="Email" id="email_field" />
+    <input type="password" placeholder="Password" id="password_field" />
+
+    <button onclick="login()">Log in to your Account</button>
+  </div>
+
+  <div id="user_div" class="loggedin-div">
+    <h3 style="color: aliceblue;">Welcome User</h3>
+    <p style="color: aliceblue;" id="user_para">temp</p>
+    <a href="https://common-codes.github.io/crispy/app">Welcome to Crispy. You're currently logged in. You should be redirected in a second. If not, click here.</a>
+    <button onclick="logout()">Rapid Logout</button>
+  </div>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script>
+    var config = {
+        // OAuth Scopes are restricted to https://common-codes.github.io/
+        apiKey: "AIzaSyA7WMeyqjkkcwDaL2KtNjsfQvHPgm2sWLA",
+        authDomain: "bugfreechat-600c4.firebaseapp.com",
+        projectId: "bugfreechat-600c4",
+        storageBucket: "bugfreechat-600c4.appspot.com",
+        messagingSenderId: "1022793471622",
+        appId: "1:1022793471622:web:6b1204419148dd4e426307"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="index.js"></script>
+
 </body>
 </html>
