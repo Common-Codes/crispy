@@ -1,12 +1,12 @@
-store.collection('guilds').get().then(snapshot => {
-    setupGuilds(snapshot.docs);
-  });
-
 auth.onAuthStateChanged(user => {
     if (user) {
-      console.log('user logged in');
+      store.collection('guilds').get().then(snapshot => {
+        setupGuilds(snapshot.docs);
+        setupUI(user);
+      });
     } else {
-      console.log('user logged out');
+      setupGuilds([])
+      setupUI();
     }
   })
 
