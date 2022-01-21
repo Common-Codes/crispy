@@ -5,14 +5,17 @@ const accountDetails = document.querySelector('.account-details');
 
 const setupUI = (user) => {
   if(user){
-    const html = `
-    <div>Logged in as ${user.email}</div>
-    `;
-    accountDetails.innerHTML = html;
+    store.collection('users').doc(user.uid).get().then(doc => {
+      const html = `
+        <div>Logged in as ${doc.data().name}</div>
+        <div>${user.email}</div>
+      `;
+      accountDetails.innerHTML = html;
+    })
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
   } else {
-    accountDetails.innerHTML = '';
+    accountDetails.innerHTML = ''
     loggedInLinks.forEach(item => item.style.display = 'none');
     loggedOutLinks.forEach(item => item.style.display = 'block');
   }

@@ -3,7 +3,7 @@ auth.onAuthStateChanged(user => {
       store.collection('guilds').get().then(snapshot => {
         setupGuilds(snapshot.docs);
         setupUI(user);
-      }).catch(err => {
+      }, err => {
         console.log(err.message)
       });
     } else {
@@ -20,7 +20,10 @@ signupForm.addEventListener('submit', (e) => {
   const password = signupForm['signup-password'].value;
 
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    
+    return store.collection('users').doc(cred.user.uid).set({
+      name: signupForm['signup-name'].value
+    });
+  }).then(() => {
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signupForm.reset();
