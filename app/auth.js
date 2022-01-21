@@ -3,6 +3,8 @@ auth.onAuthStateChanged(user => {
       store.collection('guilds').get().then(snapshot => {
         setupGuilds(snapshot.docs);
         setupUI(user);
+      }).catch(err => {
+        console.log(err.message)
       });
     } else {
       setupGuilds([])
