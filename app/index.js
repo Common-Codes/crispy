@@ -21,8 +21,6 @@ const setupUI = (user) => {
       const html = `
         <div>Logged in as ${doc.data().name}</div>
         <div>${user.email}</div>
-        <input type="text" id="update-name" />
-        <label for="update-name">New Username (BETA)</label>
       `;
       accountDetails.innerHTML = html;
     })
