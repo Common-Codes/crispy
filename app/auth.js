@@ -3,6 +3,7 @@ auth.onAuthStateChanged(user => {
       store.collection('guilds').get().then(snapshot => {
         setupGuilds(snapshot.docs);
         setupUI(user);
+        setupBadges(user);
       }, err => {
         console.log(err.message)
       });

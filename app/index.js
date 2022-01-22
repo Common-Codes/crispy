@@ -2,6 +2,18 @@ const guildList = document.querySelector('.guilds');
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('.account-details');
+const accountBadges = document.querySelector('.account-badges');
+
+const setupBadges = (user) => {
+  if(user){
+    store.collection('users').doc(user.uid).get().then(doc => {
+      const html = `
+      
+      `;
+      
+    })
+  }
+}
 
 const setupUI = (user) => {
   if(user){
