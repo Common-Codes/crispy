@@ -8,9 +8,15 @@ const setupBadges = (user) => {
   if(user){
     store.collection('users').doc(user.uid).get().then(doc => {
       const html = `
-      
+      <div class="_category_sso5v_101">Badges</div>
+      <div class="modal-content UserBadges__BadgesBase-sc-1ubexy3-0 gMJfVq" style="display: flex;">
+      <div style="display: none;">
+      <img src="https://www.svgrepo.com/show/182103/badge-medal.svg" style="height: 26px; width: 26px;"></div>
+      <div style="display: none;">
+      <img src="https://www.svgrepo.com/show/193147/badge.svg" style="height: 26px; width: 26px;"></div>
+      </div>
       `;
-      
+      accountBadges.innerHTML = html;
     })
   }
 }
@@ -49,7 +55,7 @@ const setupGuilds = (data) => {
     });
     guildList.innerHTML = html
   } else {
-    guildList.innerHTML = '<h5 class="center-align">You must first Log In to access the app!</h5>'
+    guildList.innerHTML = '<h5 class="center-align">You must first Log In to access Crispy!</h5> <a style="color: crimson;" href="https://common-codes.github.io/crispy/app/mobile/">On Mobile?</a>'
   }
 };
 
