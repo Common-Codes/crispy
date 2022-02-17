@@ -48,14 +48,16 @@ const setupGuilds = (data) => {
       const li = `
         <li>
           <div class="collapsible-header grey lighten-4"> ${guild.title} </div>
-          <div class="collapsible-body white"> ${guild.content} </div>
+          <div class="collapsible-body white"> ${guild.content} 
+            <input type="text" id="message" placeholder="Send a message...">
+          </div>
         </li>
       `;
       html += li;
     });
     guildList.innerHTML = html
   } else {
-    guildList.innerHTML = '<h5 class="center-align">You must first Log In to access Crispy!</h5> <a style="color: crimson;" href="https://common-codes.github.io/crispy/app/mobile/">On Mobile?</a>'
+    guildList.innerHTML = '<h5 class="center-align">You must first Log In to access Crispy!</h5>'
   }
 };
 

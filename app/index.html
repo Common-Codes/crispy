@@ -15,7 +15,7 @@
       <a href="#" class="brand-logo">
         <h5 style="color: black;">Crispy Chat</h5>
       </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul id="nav-mobile" class="right hide-on-med">
           <li class="logged-in" style="display: none;">
             <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
           </li>
@@ -79,6 +79,8 @@
       <div class="update-account">
         <input type="text" id="update-username" />
         <label for="update-username">New Username (BETA)</label>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -104,7 +106,9 @@
     <ul class="collapsible z-depth-0 guilds" style="border: none;">
       <li>
         <div class="collapsible-header grey lighten-4">Chat Room 21</div>
-        <div class="collapsible-body white">Text 69 haha funni</div>
+        <div class="collapsible-body white">
+          <input type="text" id="message" placeholder="Send a message">
+        </div>
       </li>
     </ul>
   </div>
