@@ -76,11 +76,16 @@
       <h4>Account details</h4><br />
       <div class="account-badges"></div>
       <div class="account-details"></div>
-      <div class="update-account">
-        <input type="text" id="update-username" />
-        <label for="update-username">New Username (BETA)</label>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div id="update-account">
+        <div class="input-field">
+          <input type="text" id="update-username" />
+          <label for="update-username">New Username (BETA)</label>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      <div id="delete-account">
+        <h4 style="color: crimson;">!! DANGER ZONE !!</h4>
+        <button type="button" onclick="deleteAccount()" class="btn btn-secondary">Delete Account</button>
       </div>
     </div>
   </div>
@@ -95,7 +100,7 @@
         </div>
         <div class="input-field">
           <textarea id="content" class="materialize-textarea" required></textarea>
-          <label for="content">Guild Content</label>
+          <label for="content">Guild Subject</label>
         </div>
         <button class="btn yellow darken-2 z-depth-0">Create</button>
       </form>
@@ -107,7 +112,9 @@
       <li>
         <div class="collapsible-header grey lighten-4">Chat Room 21</div>
         <div class="collapsible-body white">
-          <input type="text" id="message" placeholder="Send a message">
+          <div class="input-field">
+            <input type="text" id="message" placeholder="Send a message">
+          </div>
         </div>
       </li>
     </ul>
@@ -130,10 +137,20 @@
 
     const auth = firebase.auth();
     const store = firebase.firestore();
-    //const db = firebase.database();
+    const db = firebase.database();
     
     // Don't ask, site won't work without it...
     store.settings({ timestampsInSnapshots: true });
+
+    function deleteAccount() {
+      const user = firebase.auth().currentUser;
+
+      user.delete().then(() => {
+        document.location.href = 'https://common-codes.github.io/crispy/';
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

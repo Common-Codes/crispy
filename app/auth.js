@@ -22,7 +22,8 @@ signupForm.addEventListener('submit', (e) => {
 
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
     return store.collection('users').doc(cred.user.uid).set({
-      name: signupForm['signup-name'].value
+      name: signupForm['signup-name'].value,
+      email: signupForm['signup-email'].value
     });
   }).then(() => {
     //making people verify emails... maybe...

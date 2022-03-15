@@ -11,10 +11,12 @@ const setupBadges = (user) => {
       const html = `
       <div class="_category_sso5v_101">Badges</div>
       <div class="modal-content UserBadges__BadgesBase-sc-1ubexy3-0 gMJfVq" style="display: flex;">
-      <div style="display: none;">
-      <img src="https://www.svgrepo.com/show/182103/badge-medal.svg" style="height: 26px; width: 26px;"></div>
-      <div style="display: none;">
-      <img src="https://www.svgrepo.com/show/193147/badge.svg" style="height: 26px; width: 26px;"></div>
+        <div style="display: flex;">
+          <img src="https://www.svgrepo.com/show/182103/badge-medal.svg" style="height: 26px; width: 26px;">
+        </div>
+        <div style="display: flex;">
+          <img src="https://www.svgrepo.com/show/193147/badge.svg" style="height: 26px; width: 26px;">
+        </div>
       </div>
       `;
       accountBadges.innerHTML = html;
@@ -50,7 +52,9 @@ const setupGuilds = (data) => {
         <li>
           <div class="collapsible-header grey lighten-4"> ${guild.title} </div>
           <div class="collapsible-body white"> ${guild.content} 
-            <input type="text" id="message" placeholder="Send a message...">
+            <div class="input-field">
+              <input type="text" id="message" placeholder="Send a message...">
+            </div>
           </div>
         </li>
       `;
@@ -62,7 +66,7 @@ const setupGuilds = (data) => {
   }
 };
 
-const chat = (user) => {
+/*const chat = (user) => {
 
   var chat_input = document.createElement('input')
       chat_input.setAttribute('id', 'chat_input')
@@ -94,7 +98,7 @@ const chat = (user) => {
 
       
 
-}
+}*/
 
 document.addEventListener('DOMContentLoaded', function() {
 
