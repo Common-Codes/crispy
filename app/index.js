@@ -29,7 +29,7 @@ const setupUI = (user) => {
     store.collection('users').doc(user.uid).get().then(doc => {
       const html = `
         <div>Logged in as ${doc.data().name}</div>
-        <div>${user.email}</div>
+        <div>${doc.data().email}</div>
       `;
       accountDetails.innerHTML = html;
     })

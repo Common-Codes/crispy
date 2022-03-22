@@ -7,7 +7,7 @@
   <meta name="description" content="Login | Crispy - Open Source Chat">
   <meta name="keywords" content="online, chat, app, open-source. crispy">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="icon" type="image/x-icon" href="http://ggpht.ga/icons/DEV_new.png">
+  <link rel="icon" type="image/x-icon" href="https://tallerthanshort.github.io/ut3.ggpht/icons/crispy.png">
   <title>Crispy</title>
 </head>
 <body class="grey lighten-1">
@@ -59,6 +59,7 @@
   <div id="modal-login" class="modal">
     <div class="modal-content">
       <h4>Login</h4><br />
+      <p id="errtext"> </p>
       <form id="login-form">
         <div class="input-field">
           <input type="email" id="login-email" required />
@@ -88,6 +89,7 @@
       <div id="delete-account">
         <h4 style="color: crimson;">!! DANGER ZONE !!</h4>
         <button type="button" onclick="deleteAccount()" class="btn btn-secondary">Delete Account</button>
+        <h4 id="errlog" style="color:crimson"> </h4>
       </div>
     </div>
   </div>
@@ -128,7 +130,7 @@
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-database.js"></script>
   <script>
     var firebaseConfig = {
-      //reads, writes and OAuth Scopes are restricted to the URL of https://common-codes.github.io/
+//reads, writes and OAuth Scopes are restricted to the URL of https://common-codes.github.io/ and only users that are signed-in can read and write data to firebase.auth().currentUser
       apiKey: "AIzaSyAMo9JcJdFEsXlKh3bHc5H-hX8fq41vIaU",
       authDomain: "crispy-chat.firebaseapp.com",
       databaseURL: "https://crispy-chat-default-rtdb.firebaseio.com",
@@ -145,12 +147,13 @@
     store.settings({ timestampsInSnapshots: true });
 
     function deleteAccount() {
+      const errortxt = document.getElementById('errlog');
       const user = firebase.auth().currentUser;
 
       user.delete().then(() => {
         document.location.href = 'https://common-codes.github.io/crispy/';
       }).catch((error) => {
-        console.log(error);
+        errortxt.innerHTML = error;
       });
     }
   </script>
