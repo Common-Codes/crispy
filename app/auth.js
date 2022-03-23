@@ -5,7 +5,7 @@ auth.onAuthStateChanged(user => {
         setupUI(user);
         setupBadges(user);
       }, err => {
-        console.log(err.message)
+        window.alert(err.message)
       });
     } else {
       setupGuilds([])
