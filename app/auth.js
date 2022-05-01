@@ -26,9 +26,8 @@ signupForm.addEventListener('submit', (e) => {
       email: signupForm['signup-email'].value
     });
   }).then(() => {
-    //making people verify emails... maybe...
+    //Send optional email verification
     firebase.auth().currentUser.sendEmailVerification();
-    //ok, not quite there yet...
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signupForm.reset();
