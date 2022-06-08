@@ -1,4 +1,4 @@
-*updated June 7th, 2022*
+*Updated: June 7th, 2022*
 
 # Privacy Policy
 
@@ -41,9 +41,9 @@ We will **NEVER** sell your data to any third-parties, although we use certain s
 
 ## Where is this information stored?
 
-Since this is an open-source project, we have team members from various places across Europe and North America. Your information is stored on a Virtual Private Server in Northern America.
+Since this is an open-source project, we have team members from various places across Europe and North America. Your information is currently stored on a Virtual Private Server in Northern America.
 
-Exceptions to third party service providers used to process your information, as mentioned above.
+Exceptions to third party service providers used to process your information, as mentioned above, apply.
 
 ## Children's privacy
 
@@ -51,9 +51,9 @@ We follow the Children's Online Privacy Protection Act (“COPPA”), which requ
 
 ## Changes to this Privacy Policy
 
-As we improve our service(s), we may update our Privacy Policy in the future if needed. We will notify you of any changes made to our Privacy Policy  and when said changes will take effect beforehand, by specifying the date(s).
+As we improve our service(s), we may update our Privacy Policy in the future if needed. We will notify you of any changes made to our Privacy Policy and when said changes will take effect beforehand, by specifying the date(s).
 
 You are advised to review this Privacy Policy periodically for any changes. Such changes to the Privacy Policy are effective when they are posted on this page.
 
 
-> *Note: Only our original documents are considered as valid in a court of legal jurisdiction. Any translstions of this document, made by third parties, are considered void in a case of legal jurisdiction. Any and all court summonings shall proceed in the country of Spain, where this Privacy Policy, the Terms of Service, and Application were made.*
+> *Note: Only our original Terms of Service and Privacy Policy documents are considered as valid in a court of legal jurisdiction. Any translstions of this document, made by third parties, are considered void in a case of legal jurisdiction. Any and all court summonings shall proceed in the country of Spain, where this Privacy Policy, the Terms of Service, and Application were made.*
