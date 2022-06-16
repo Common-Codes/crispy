@@ -13,7 +13,8 @@
   <meta property="og:description" content="Login | Crispy - Open Source Chat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="icon" type="image/x-icon" href="https://tallerthanshort.github.io/ut3.ggpht/icons/crispy.png">
-  <title>Crispy</title>
+  <title>Crispy | App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="grey lighten-1">
 
@@ -56,6 +57,9 @@
           <input type="text" id="signup-name" required />
           <label for="signup-name">Username</label>
         </div>
+        <div class="modal-content">
+          <p style="color: red;">By continuing, you agree to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.</p>
+        </div>
         <button class="btn yellow darken-2 z-depth-0">Sign up</button>
       </form>
     </div>
@@ -73,6 +77,9 @@
         <div class="input-field">
           <input type="password" id="login-password" required />
           <label for="login-password">Your password</label>
+        </div>
+        <div class="modal-content">
+          <p style="color: red;">By continuing using our platform, you agree to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.</p>
         </div>
         <button class="btn yellow darken-2 z-depth-0">Login</button>
       </form>
@@ -121,13 +128,15 @@
     </nav>
   </div>
 
-  <!--Temporarily hard-coded guild objects, to prevent errors-->
-  <div id="guild-title-current">
-    <h4 style="color: #151515; transform: translate(42.2%, 9.2%); transform-origin: left bottom;"></h4>
+  <!--Temporarily flux-coded guild objects, to prevent errors-->
+  <div id="guild-current">
+    <h4 id="guild-title-display" style="color: #151515"></h4>
   </div>
 
-  <div id="guild-context">
-    <p style="color: #151515; transform: translate(0.4%, 0%); transform-origin: left top;"></p>
+  <div id="chat_container">
+    <div id="chat_inner_container">
+      <div id="chat_content_container"></div>
+    </div>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
