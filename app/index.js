@@ -3,7 +3,7 @@ const navBar = document.getElementById("navbar");
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('.account-details');
-const accountBadges = document.querySelector('.account-badges');
+const accountBadges = document.getElementById('badge-location');
 const currentGuildDisplay = document.getElementById('chat_inner_container');
 let nameVar = ''
 let guildVar = ''
@@ -23,15 +23,8 @@ const setupBadges = (user) => {
     store.collection('users').doc(user.uid).get().then(doc => {
       const badges = doc.data(); 
       const badge = `
-      <div class="_category_sso5v_101">Badges</div>
-      <div class="modal-content UserBadges__BadgesBase-sc-1ubexy3-0 gMJfVq" style="display: flex;">
-        <div style="display: flex;">
-          <img title="Kickstarter" src="https://www.svgrepo.com/show/182103/badge-medal.svg" style="height: 28px; width: 28px;">
-        </div>
-        <div style="display: none;">
-          <img title="Bug Hunter" src="https://www.svgrepo.com/show/193147/badge.svg" style="height: 28px; width: 28px;">
-        </div>
-      </div>
+        ${badges.sc1}
+        ${badges.sc2}
       `;
       accountBadges.innerHTML = badge;
     })
@@ -46,7 +39,7 @@ const setupUI = (user) => {
       nameVar = `${doc.data().name}`
       profileVar = `${doc.data().img}`
       const html = `
-        <div><img src="${doc.data().img}" title="Profile" style="height: 48px; width: 48px;"></div>
+        <div><img src="${doc.data().img}" title="Profile Image" style="height: 48px; width: 48px;"></div>
         <div>Logged in as ${doc.data().name}</div>
         <div>${doc.data().email}</div>
       `;
@@ -319,7 +312,7 @@ const refresh_chat = () => {
       if(validURL(message)) {
         var message_content = document.createElement('div')
         message_content.setAttribute('class', 'message_content')
-        message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer;" onclick="location.href='${message}'">${message}</a>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/#url_src=${message}&size=46" style="height: 252px; width: 100%;" frameborder="0"></iframe></div>`;
+        message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer;" onclick="location.href='${message}'">${message}</a>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/#url_src=${message}&size=47" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
       } else {
         var message_content = document.createElement('p')
         message_content.setAttribute('class', 'message_content')
