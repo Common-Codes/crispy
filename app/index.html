@@ -167,6 +167,7 @@
     function deleteAccount() {
       const errortxt = document.getElementById('errlog');
       const user = firebase.auth().currentUser;
+      console.log(user.uid);
 
       store.collection("users").doc(cred.user.uid).delete().then(() => {
         user.delete()
