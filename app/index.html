@@ -168,7 +168,8 @@
       const errortxt = document.getElementById('errlog');
       const user = firebase.auth().currentUser;
 
-      user.delete().then(() => {
+      store.collection("users").doc(cred.user.uid).delete().then(() => {
+        user.delete()
         document.location.href = 'https://common-codes.github.io/crispy/';
       }).catch((error) => {
         errortxt.innerHTML = error;
