@@ -24,7 +24,11 @@ const password = signupForm['signup-password'].value;
 auth.createUserWithEmailAndPassword(email, password).then(cred => {
   return store.collection('users').doc(cred.user.uid).set({
     name: signupForm['signup-name'].value,
-    email: signupForm['signup-email'].value
+      email: signupForm['signup-email'].value,
+      img: 'https://tallerthanshort.github.io/ut3.ggpht/icons/crispy.png',
+      sc1: `<div style="display: none"></div>`,
+      sc2: `<div style="display: none"></div>`,
+      sc3: `<div style="display: none"></div>`
   });
 }).then(() => {
   //making people verify emails... maybe...
