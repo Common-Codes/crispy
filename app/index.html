@@ -167,9 +167,8 @@
     function deleteAccount() {
       const errortxt = document.getElementById('errlog');
       const user = firebase.auth().currentUser;
-      console.log(user.uid);
 
-      store.collection("users").doc(cred.user.uid).delete().then(() => {
+      store.collection("users").doc(user.uid).delete().then(() => {
         user.delete()
         document.location.href = 'https://common-codes.github.io/crispy/';
       }).catch((error) => {
