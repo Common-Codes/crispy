@@ -169,8 +169,7 @@
       const user = firebase.auth().currentUser;
 
       store.collection("users").doc(user.uid).delete().then(() => {
-        user.delete()
-        document.location.href = 'https://common-codes.github.io/crispy/';
+        user.delete();
       }).catch((error) => {
         errortxt.innerHTML = error;
       });
