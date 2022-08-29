@@ -41,8 +41,8 @@ const setupUI = (user) => {
       const html = `
         <div><img src="${doc.data().img}" title="Profile Image" style="height: 48px; width: 48px;"></div>
         <div>Logged in as ${doc.data().name}</div>
-        <div>${user.email}</div> //user is only readable by user - no one else. This will allow others to see ur profile but not ur email.
-      `;
+        <div>${user.email}</div> 
+      `; //user is only readable by user, compared to doc, which is readable to any user logged in.
       accountDetails.innerHTML = html;
     })
     loggedInLinks.forEach(item => item.style.display = 'block');
