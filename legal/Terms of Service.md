@@ -1,4 +1,4 @@
-*Updated: June 8th, 2022*
+*Updated: September 2nd, 2022*
 
 # Terms of Service
 
@@ -14,8 +14,8 @@ Continuing are some abbreviations used throughout this document, along with thei
 - 'Crispy Chat' and 'Crispy' refer to Crispy, the Website of which can be found at https://common-codes.github.io/crispy
 - 'Website', 'Application' and 'App' refer to the official instance of Crispy, served as-is at https://common-codes.github.io/crispy
 - 'Chat App', 'Service', 'Platform' and 'Chat Site' can be used as either of the above.
-- 'You', 'Your', 'Yourself', 'User', 'Users' shall refer to the end user(s).
-- 'Servers', 'Guild Object' and 'Guild' refer to Guilds or the general Guild Objects, the Community managed public sections of the site where users can interact with one another using text messages.
+- 'You', 'Your', 'Yourself', 'User', 'Users' shall refer to the end user(s) (you).
+- 'Servers', 'Guild Object' and 'Guild' refer to Guilds or the general Guild Objects, the Community managed public sections of the site where users can interact with one another using text messages and media such as images and links to other sites.
 - 'Personal Information' and 'Personal Data' refer to the personal data collected to ensure site functionality, including registered e-mail, chosen username and encrypted password.
 - 'Terms' refers to these Terms of Service.
 
@@ -28,7 +28,7 @@ Your access to and use of the service is conditioned on your acceptance of and c
 **By using our Service, you agree:**
 
 - You are 13 years of age or older.
-- You have read and understood our Terms and Privacy Policy.
+- You have read and understood our Terms and [Privacy Policy](https://github.com/Common-Codes/blob/main/legal/Privacy%20Policy).
 
 These Terms are subject to change at any time, we will always notify you at least 7 days in advance when we make changes.
 
