@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <title>Invitation to Join a Guild | Crispy Nightly</title>
+      <meta name="description" content="View your favorite uTube channels">
+      <meta property="og:site_name" content="Invitation to join a Guild | Nightly">
+      <meta property="og:title" content="Invites | Crispy Nightly">
+      <link rel="icon" href="https://tallerthanshort.github.io/ut3.ggpht/icons/crispy.png" type="image/png">
+      <meta property="og:image" content="https://tallerthanshort.github.io/ut3.ggpht/icons/crispy.png">
+      <meta property="og:description" content="Join your favorite guilds with friends to chat or hang out | Click this link to join an invite-only space">
+   </head>
+   <body>
+      <div id="poster" style="position: absolute; top: 50px;">
+         <div style="background-color: #EBABAB; width: 100%;">
+            <b style="position: relative;">Resolving Invite Code...</b>
+            <br>
+            <center>
+               <svg viewBox="0 0 512 512" class="spinner">
+                  <path d="M222.7 32.1c5 16.9-4.6 34.8-21.5 39.8C121.8 95.6 64 169.1 64 256c0 106 86 192 192 192s192-86 192-192c0-86.9-57.8-160.4-137.1-184.1c-16.9-5-26.6-22.9-21.5-39.8s22.9-26.6 39.8-21.5C434.9 42.1 512 140 512 256c0 141.4-114.6 256-256 256S0 397.4 0 256C0 140 77.1 42.1 182.9 10.6c16.9-5 34.8 4.6 39.8 21.5z"/>
+               </svg>
+            </center>
+            <br>
+            <button style="background-color: lightgray; width: 100%; text-transform: uppercase; cursor: pointer;">loading</button>
+            </div>
+      </div>
+
+      <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+      <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyAMo9JcJdFEsXlKh3bHc5H-hX8fq41vIaU",
+      authDomain: "crispy-chat.firebaseapp.com",
+      databaseURL: "https://crispy-chat-default-rtdb.firebaseio.com",
+      projectId: "crispy-chat",
+      storageBucket: "crispy-chat.appspot.com",
+      messagingSenderId: "284700911258",
+      appId: "1:284700911258:web:dc392a5fee18897892e123"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const store = firebase.firestore();
+    
+    // Don't ask, invites won't work without it...
+    store.settings({ timestampsInSnapshots: true });
+     </script>
+
+     <script src="script.js"></script>
+   </body>
+</html>
