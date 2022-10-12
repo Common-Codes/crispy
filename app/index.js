@@ -20,13 +20,11 @@ const validURL = (str) =>{
 
 const setupBadges = (user) => {
   if(user){
-    store.collection('users').doc(user.uid).get().then(doc => {
-      const badges = doc.data(); 
-      const badge = `
-        ${badges.sc1}
-        ${badges.sc2}
-      `;
-      accountBadges.innerHTML = badge;
+    store.collection('users').doc(user.uid).collection('badges').get().then(doc => {
+      doc.forEach(dig => {
+        const badger = `${dig.data().badge}`;
+        accountBadges.innerHTML += badger
+      })
     })
   } else{
     accountBadges.innerHTML = ''
@@ -92,6 +90,10 @@ const create_load = (id) =>{
 
 }
 
+var todate = new Date();
+var h = todate.getHours();
+var m = todate.getMinutes();
+
 const send_message = (message) => {
   var parent = this
 
@@ -108,7 +110,8 @@ const send_message = (message) => {
       name: nameVar,
       message: message,
       avatar: profileVar,
-      index: index
+      index: index,
+      timestamp: `${h}:${m}`
     })
     .then(function(){
       refresh_chat()
@@ -292,6 +295,7 @@ const refresh_chat = () => {
       var name = data.name
       var avatar = data.avatar
       var message = data.message
+      var sentime = data.timestamp
 
       var message_container = document.createElement('div')
       message_container.setAttribute('class', 'message_container')
@@ -301,10 +305,11 @@ const refresh_chat = () => {
 
       var message_user_container = document.createElement('div')
       message_user_container.setAttribute('class', 'message_user_container')
+      message_user_container.style.cursor = 'pointer'
 
       var message_user = document.createElement('div')
       message_user.setAttribute('class', 'message_user')
-      message_user.innerHTML = `<img src="${avatar}" style="width: 18px; height: 18px; border-radius: 50%;"> ${name}`
+      message_user.innerHTML = `<img src="${avatar}" style="width: 18px; height: 18px; border-radius: 50%;"><p style="margin-top: -21px; margin-left: 20px;">${name}</p><p style="margin-top: -32px; margin-left: 20px;font-size: 9px;">${sentime}</p>`
 
       var message_content_container = document.createElement('div')
       message_content_container.setAttribute('class', 'message_content_container')
@@ -312,11 +317,11 @@ const refresh_chat = () => {
       if(validURL(message)) {
         var message_content = document.createElement('div')
         message_content.setAttribute('class', 'message_content')
-        message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer;" onclick="location.href='${message}'">${message}</a>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/#url_src=${message}&size=47" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
+        message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer; margin-top: 15px;" onclick="location.href='${message}'">${message}</p>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/?url_src=${message}&size=47" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
       } else {
         var message_content = document.createElement('p')
         message_content.setAttribute('class', 'message_content')
-        message_content.textContent = `${message}`;
+        message_content.innerHTML = `<p style="margin-top: 16px;">${message}</p>`;
       }
 
       message_user_container.append(message_user)
