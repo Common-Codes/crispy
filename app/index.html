@@ -53,16 +53,12 @@
           <label for="signup-email">Email address</label>
         </div>
         <div class="input-field">
-          <input type="password" id="signup-password" required />
-          <label for="signup-password">Choose password</label>
-        </div>
-        <div class="input-field">
           <input type="text" id="signup-name" required />
           <label for="signup-name">Username</label>
         </div>
         <div class="input-field">
-          <input type="url" id="signup-img" required />
-          <label for="signup-name">Profile Image (URL)</label>
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Password</label>
         </div>
         <div class="modal-content">
           <p style="color: red;">By continuing, you agree to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.</p>
@@ -105,7 +101,7 @@
       <div id="delete-account">
         <p style="margin-top: -4px; color: blue;">BETA</p>
         <h4 style="color: crimson;">!! DANGER ZONE !!</h4>
-        <button type="button" onclick="deleteAccount()" class="btn btn-secondary">Delete Account</button>
+        <button type="button" onclick="deleteAccount()" class="btn btn-primary">Delete Account</button>
         <h4 id="errlog" style="color:crimson"> </h4>
       </div>
     </div>
@@ -187,5 +183,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="auth.js"></script>
   <script src="index.js"></script>
+  <script src="mobile.js" defer></script>
 </body>
 </html>

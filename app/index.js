@@ -5,12 +5,13 @@ const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('.account-details');
 const accountBadges = document.getElementById('badge-location');
 const currentGuildDisplay = document.getElementById('chat_inner_container');
+let screenWidth = window.innerWidth;
 let nameVar = ''
 let guildVar = ''
 let profileVar = ''
 
 const validURL = (str) =>{
-  var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  var regex = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|bmp)$/i;
   if(!regex.test(str)){
       return false; //false
   } else {
@@ -40,11 +41,16 @@ const setupUI = (user) => {
         <div><img src="${doc.data().img}" title="Profile Image" style="height: 48px; width: 48px;"></div>
         <div>Logged in as ${doc.data().name}</div>
         <div>${user.email}</div> 
-      `; //user is only readable by user, compared to doc, which is readable to any user logged in.
+      `; //user is only readable by user, compared to doc, which is readable to any user logged in (and authorised to view said data).
       accountDetails.innerHTML = html;
     })
     loggedInLinks.forEach(item => item.style.display = 'block');
     loggedOutLinks.forEach(item => item.style.display = 'none');
+    if(screenWidth > '900'){
+      return;
+    } else{
+      document.getElementById("delete-account").innerHTML += `<button class="btn btn-secondary" onclick="mobileDevTools()">Mobile Dev Tools</button>`;
+    }
   } else {
     accountDetails.innerHTML = ''
     loggedInLinks.forEach(item => item.style.display = 'none');
@@ -90,10 +96,6 @@ const create_load = (id) =>{
 
 }
 
-var todate = new Date();
-var h = todate.getHours();
-var m = todate.getMinutes();
-
 const send_message = (message) => {
   var parent = this
 
@@ -111,7 +113,6 @@ const send_message = (message) => {
       message: message,
       avatar: profileVar,
       index: index,
-      timestamp: `${h}:${m}`
     })
     .then(function(){
       refresh_chat()
@@ -295,7 +296,6 @@ const refresh_chat = () => {
       var name = data.name
       var avatar = data.avatar
       var message = data.message
-      var sentime = data.timestamp
 
       var message_container = document.createElement('div')
       message_container.setAttribute('class', 'message_container')
@@ -309,7 +309,7 @@ const refresh_chat = () => {
 
       var message_user = document.createElement('div')
       message_user.setAttribute('class', 'message_user')
-      message_user.innerHTML = `<img src="${avatar}" style="width: 18px; height: 18px; border-radius: 50%;"><p style="margin-top: -21px; margin-left: 20px;">${name}</p><p style="margin-top: -32px; margin-left: 20px;font-size: 9px;">${sentime}</p>`
+      message_user.innerHTML = `<img src="${avatar}" style="width: 18px; height: 18px; border-radius: 50%;"><p style="margin-top: -21px; margin-left: 20px;">${name}</p>`
 
       var message_content_container = document.createElement('div')
       message_content_container.setAttribute('class', 'message_content_container')
@@ -317,7 +317,7 @@ const refresh_chat = () => {
       if(validURL(message)) {
         var message_content = document.createElement('div')
         message_content.setAttribute('class', 'message_content')
-        message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer; margin-top: 15px;" onclick="location.href='${message}'">${message}</p>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/?url_src=${message}&size=47" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
+        message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer; margin-top: 15px;" onclick="location.href='${message}'">${message}</p>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/?url_src=${message}&size=40" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
       } else {
         var message_content = document.createElement('p')
         message_content.setAttribute('class', 'message_content')
