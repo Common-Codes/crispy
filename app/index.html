@@ -15,6 +15,7 @@
   <link rel="icon" type="image/x-icon" href="https://tallerthanshort.github.io/ut3.ggpht/icons/crispy.png">
   <title>Crispy | App</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="profiles.js" defer></script>
 </head>
 <body class="grey lighten-1">
 
@@ -44,16 +45,22 @@
     </div>
   </nav>
 
+  <div id="navbar" class="left hide-on-med" style="display: flex;">
+    <ul id="guild-nav" class="left hide-on-med" style="list-style-type: none; margin: 0; padding: 0; width: 51px; background-color: #f1f1f1;">
+        <li class="eggz" style="display: none;">eggz</li>
+    </ul>
+  </div>
+
   <div id="modal-signup" class="modal">
     <div class="modal-content">
       <h4>Sign up</h4><br />
       <form id="signup-form">
         <div class="input-field">
           <input type="email" id="signup-email" required />
-          <label for="signup-email">Email address</label>
+          <label for="signup-email">Email</label>
         </div>
         <div class="input-field">
-          <input type="text" id="signup-name" required />
+          <input type="text" id="signup-name" maxlength="15" required />
           <label for="signup-name">Username</label>
         </div>
         <div class="input-field">
@@ -75,7 +82,7 @@
       <form id="login-form">
         <div class="input-field">
           <input type="email" id="login-email" required />
-          <label for="login-email">Email address</label>
+          <label for="login-email">Email</label>
         </div>
         <div class="input-field">
           <input type="password" id="login-password" required />
@@ -85,6 +92,23 @@
           <p style="color: red;">By continuing using our platform, you agree to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.</p>
         </div>
         <button class="btn yellow darken-2 z-depth-0">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-reauth" class="modal">
+    <div class="modal-content">
+      <h4>Re-Authorise Access to your Account</h4><br />
+      <p id="rerrtext">Let's verify it's you before attempting to delete your account</p>
+      <form id="reauth-form">
+        <div class="input-field">
+          <input type="password" id="reauth-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <div class="modal-content">
+          <p style="color: red;">By continuing, you're agreeing to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.<br><br>By deleting your account, you agree that we cannot in any way restore your data. Your email, hashed password and profile (including profile image, badges, etc) will be deleted permanently. Your messages will stay visible under your previous account username with server-cached profile image.</p>
+        </div>
+        <button class="btn btn-primary z-depth-0">Authenticate</button>
       </form>
     </div>
   </div>
@@ -101,15 +125,28 @@
       <div id="delete-account">
         <p style="margin-top: -4px; color: blue;">BETA</p>
         <h4 style="color: crimson;">!! DANGER ZONE !!</h4>
-        <button type="button" onclick="deleteAccount()" class="btn btn-primary">Delete Account</button>
+        <button type="button" onclick="reAuthenticate()" class="btn btn-primary">Delete Account</button>
         <h4 id="errlog" style="color:crimson"> </h4>
       </div>
     </div>
   </div>
 
+  <div id="modal-extaccount" class="modal">
+    <div class="modal-content center-align">
+      <h4>User's details</h4>
+      <p style="margin-top: -4px; color: blue;">BETA</p><br />
+      <div class="ext-account-badges">
+        <div class="_category_sso5v_101">User's Badges</div>
+        <div class="modal-content UserBadges__BadgesBase-sc-1ubexy3-0 gMJfVq" id="ext-badge-location" style="display: flex;"></div>
+      </div>
+      <div class="ext-account-details"></div>
+    </div>
+  </div>
+
   <div id="modal-create" class="modal">
     <div class="modal-content">
-      <h4>Create Guild</h4><br />
+      <h4>Create Guild</h4>
+      <b style="margin-top: -4px; color: blue;">BETA</b><br />
       <form id="create-form">
         <div class="input-field">
           <input type="text" id="title" required>
@@ -122,17 +159,6 @@
         <button class="btn yellow darken-2 z-depth-0">Create</button>
       </form>
     </div>
-  </div>
-
-  <div id="navbar" class="left hide-on-med" style="transform: rotate(90deg) translate(-42.2%, 20%);
-  transform-origin: left bottom; display: block;">
-  <nav id="nav" style="background-color: #e0e0e0;">
-    <div>
-      <ul id="guild-nav" class="left hide-on-med">
-          <li class="eggz" style="display: none;">eggz</li>
-        </ul>
-      </div>
-    </nav>
   </div>
 
   <!--Temporarily flux-coded guild objects, to prevent errors-->
@@ -167,22 +193,12 @@
     
     // Don't ask, site won't work without it...
     store.settings({ timestampsInSnapshots: true });
-
-    function deleteAccount() {
-      const errortxt = document.getElementById('errlog');
-      const user = firebase.auth().currentUser;
-
-      store.collection("users").doc(user.uid).delete().then(() => {
-        user.delete();
-      }).catch((error) => {
-        errortxt.innerHTML = error;
-      });
-    }
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="auth.js"></script>
   <script src="index.js"></script>
   <script src="mobile.js" defer></script>
+  <script src="message.js" defer></script>
 </body>
 </html>
