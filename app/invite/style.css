@@ -1,12 +1,41 @@
 body{
     background-color: #bdbdbd;
-    color: black;
+ }
+
+ .poster {
+   height: 100%;
+   display: flex;
+   color: #fff;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+   background-size: cover;
+   background-position: center;
+ }
+
+ .details {
+   text-align: center;
+   padding: 48px 26px 24px;
+   background-color: rgba(0, 0, 0, 0.96);
+   overflow: visible;
+   box-sizing: border-box;
+ }
+
+ button {
+   margin: auto;
+   display: block;
+   text-transform: uppercase;
+   cursor: pointer;
+   border: none;
+   padding: 10px 12px;
+   font-weight: 600;
  }
  
  .spinner{
     height: 30px;
     width: 30px;
     animation: spinner 0.9s linear infinite;
+    fill: #bdbdbd;
  }
  
  @keyframes spinner{

@@ -14,9 +14,9 @@
       <meta property="og:description" content="Join your favorite guilds with friends to chat or hang out | Click this link to join an invite-only space">
    </head>
    <body>
-      <div id="poster" style="position: absolute; top: 50px;">
-         <div style="background-color: #EBABAB; width: 100%;">
-            <b style="position: relative;">Resolving Invite Code...</b>
+      <div class="poster">
+         <div class="details">
+            <h1 style="position: relative;">Resolving Invite Code...</b>
             <br>
             <center>
                <svg viewBox="0 0 512 512" class="spinner">
@@ -30,6 +30,7 @@
 
       <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
       <script>
     var firebaseConfig = {
       apiKey: "AIzaSyAMo9JcJdFEsXlKh3bHc5H-hX8fq41vIaU",
@@ -42,6 +43,7 @@
     };
     firebase.initializeApp(firebaseConfig);
 
+    const auth = firebase.auth();
     const store = firebase.firestore();
     
     // Don't ask, invites won't work without it...
