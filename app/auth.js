@@ -4,6 +4,7 @@ auth.onAuthStateChanged(user => {
       setupGuilds(snapshot.docs, user);
       setupUI(user);
       setupBadges(user);
+      document.getElementById('chat_container').style.display = `flex`
     }, err => {
       window.alert(err.message)
     });
@@ -11,6 +12,7 @@ auth.onAuthStateChanged(user => {
     setupGuilds([])
     setupUI();
     document.getElementById('guild-title-display').innerText = 'You Must First Log In To Access Crispy'
+    document.getElementById('chat_container').style.display = `none`
   }
 })
 
