@@ -1,15 +1,25 @@
-// Check Image URL's
-const validURL = (str) =>{
-    var imgregex = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|bmp)$/i;
-    var regex = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+const fragment = new URLSearchParams(window.location.search.slice(1));
+const guildUid = fragment.get('g');
+const currentGuildDisplay = document.getElementById('chat_inner_container');
+let guildVar = ''
+
+// Validating URL's with regex
+const validIMG = (str) =>{
+    var imgregex = /^https?:\/\/(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|bmp)$/gim;
     if(!imgregex.test(str)){
-        return false; //false image
-    } else if(!regex.test(str)){
-        return false; //false web
+        return false; //false
     } else{
-        console.log(`match ` + str)
         return true; //true ^
     }
+}
+
+const validURL = (str) =>{
+  var regex = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+  if(!regex.test(str)){
+    return false; //false
+  } else {
+    return true; //true ^
+  }
 }
 
 const create_load = (id) =>{
@@ -32,6 +42,12 @@ const create_load = (id) =>{
     var parent = this
   
     var ref = firebase.database().ref();
+  
+    ref.on("value", function(snapshot) {
+      console.log("WSS: Success");
+    }, function (error) {
+      console.log("Error: " + error.code);
+    });
     
     if(nameVar == null && message == null){
       return
@@ -44,7 +60,7 @@ const create_load = (id) =>{
         name: nameVar,
         message: message,
         avatar: profileVar,
-        index: index,
+        index: index
       })
       .then(function(){
         refresh_chat()
@@ -52,146 +68,52 @@ const create_load = (id) =>{
     })
   }
   
-  const displayActiveChat = () => {
-    guildVar = 'creak'
-    document.getElementById('guild-title-display').innerText = 'TallerThanShort\'s Crack Den'
-      html = 
-      `
-      <div id="chat_input_container">
-        <input type="text" id="chat_input" />
-        <label for="chat_input">Send Message</label>
-        <div id="chat_input_send">
-          <button id="chat_input_send" style="display: none;">
+  if(guildUid != null){
+    store.collection('guilds').where("uid", "==", guildUid).get().then((querySnaphot) => {
+      querySnaphot.forEach((doc) => {
+        const gday = doc.data();
+        guildVar = `${gday.uid}`;
+        document.getElementById('guild-title-display').innerText = `${gday.title}`;
+        document.title = `Nightly | ${gday.title}`
+        html = 
+        `
+        <div id="chat_content_container"></div>
+        <div id="chat_input_container">
+          <input type="text" id="chat_input" />
+          <label for="chat_input">Send Message</label>
+          <div id="chat_input_send">
+            <button id="chat_attachments" style="display: block; border: none; width: 20px; height: 20px; position: relative; top: -44px; left: -29px;" disabled><img src="https://www.svgrepo.com/show/16233/upload.svg"></button>
+          </div>
         </div>
-      </div>
-      `
-      currentGuildDisplay.innerHTML += html
-      const chat_input = document.getElementById('chat_input');
-      const chat_input_send = document.getElementById('chat_input_send')
-      var messages = db.ref(`chats/${guildVar}`);
+        `
+        currentGuildDisplay.innerHTML = html;
+        const chat_input = document.getElementById('chat_input');
+        const chat_attachment = document.getElementById('chat_attachments')
+        var messages = db.ref(`chats/${guildVar}`);
       chat_input.onkeyup  = function(){
         if(chat_input.value.length > 0){
           if (event.keyCode === 13) {
-            document.getElementById("chat_input_send").click();
+              if(chat_input.value.length <= 0){
+                return
+              }
+              create_load('chat_content_container')
+              send_message(chat_input.value)
+              chat_input.value = ''
+              // Focus on the input there after
+              chat_input.focus()
            }
-          chat_input_send.removeAttribute('disabled')
-          chat_input_send.classList.add('enabled')
-          chat_input_send.onclick = function(){
-            chat_input_send.setAttribute('disabled', true)
-            chat_input_send.classList.remove('enabled')
-            if(chat_input.value.length <= 0){
-              return
-            }
-            create_load('chat_content_container')
-            send_message(chat_input.value)
-            chat_input.value = ''
-            // Focus on the input there after
-            chat_input.focus()
-          }
-        }else{
-          chat_input_send.classList.remove('enabled')
         }
       }
-  
-  
-  
-  
-      document.getElementById('chat_content_container').innerHTML = `<p style="style="color: #151515;">${nameVar}, Say Something</p>`
-  };
-  
-  const displayNotifChat = () => {
-    guildVar = 'common'
-    document.getElementById('guild-title-display').innerText = 'Common-Codes'
-      html = 
-      `
-      <div id="chat_input_container">
-        <input type="text" id="chat_input" />
-        <label for="chat_input">Send Message</label>
-        <div id="chat_input_send">
-          <button id="chat_input_send" style="display: none;">
-        </div>
-      </div>
-      `
-      currentGuildDisplay.innerHTML += html
-      const chat_input = document.getElementById('chat_input');
-      const chat_input_send = document.getElementById('chat_input_send')
-      var messages = db.ref(`chats/${guildVar}`);
-      chat_input.onkeyup  = function(){
-        if(chat_input.value.length > 0){
-          if (event.keyCode === 13) {
-            document.getElementById("chat_input_send").click();
-           }
-          chat_input_send.removeAttribute('disabled')
-          chat_input_send.classList.add('enabled')
-          chat_input_send.onclick = function(){
-            chat_input_send.setAttribute('disabled', true)
-            chat_input_send.classList.remove('enabled')
-            if(chat_input.value.length <= 0){
-              return
-            }
-            create_load('chat_content_container')
-            send_message(chat_input.value)
-            chat_input.value = ''
-            // Focus on the input there after
-            chat_input.focus()
-          }
-        }else{
-          chat_input_send.classList.remove('enabled')
-        }
-      }
-  
-  
-  
-  
-      document.getElementById('chat_content_container').innerHTML = `<p style="style="color: #151515;">${nameVar}, Say Something</p>`
-  };
-  
-  const displayNewGuild = () => {
-    guildVar = 'coolkidsclub'
-    document.getElementById('guild-title-display').innerText = 'VTC - Very Terrible Code'
-      html = 
-      `
-      <div id="chat_input_container">
-        <input type="text" id="chat_input" />
-        <label for="chat_input">Send Message</label>
-        <div id="chat_input_send">
-          <button id="chat_input_send" style="display: none;">
-        </div>
-      </div>
-      `
-      currentGuildDisplay.innerHTML += html
-      const chat_input = document.getElementById('chat_input');
-      const chat_input_send = document.getElementById('chat_input_send')
-      var messages = db.ref(`chats/${guildVar}`);
-      chat_input.onkeyup  = function(){
-        if(chat_input.value.length > 0){
-          if (event.keyCode === 13) {
-            document.getElementById("chat_input_send").click();
-           }
-          chat_input_send.removeAttribute('disabled')
-          chat_input_send.classList.add('enabled')
-          chat_input_send.onclick = function(){
-            chat_input_send.setAttribute('disabled', true)
-            chat_input_send.classList.remove('enabled')
-            if(chat_input.value.length <= 0){
-              return
-            }
-            create_load('chat_content_container')
-            send_message(chat_input.value)
-            chat_input.value = ''
-            // Focus on the input there after
-            chat_input.focus()
-          }
-        }else{
-          chat_input_send.classList.remove('enabled')
-        }
-      }
-  
-  
-  
-  
-      document.getElementById('chat_content_container').innerHTML = `<p style="style="color: #151515;">${nameVar}, Say Something</p>`
-  };
+
+      const user = auth.currentUser
+      store.collection("users").doc(user.uid).get().then(doc => {
+        document.getElementById('chat_content_container').innerHTML = `<p style="style="color: #151515;">${doc.data().name}, Say Something</p>`
+      })
+      })
+    })
+  } else{
+    currentGuildDisplay.innerHTML = `<b>Welcome to Crispy!</b><br><br><b>To get you started, here are some useful locations:</b><br><br><button class="btn cyan darken-1 z-depth-1" onclick="location.href='https://common-codes.github.io/crispy-nightly/app/invite?code=commoncodes&expire=3873025738000';">Join official C-C guild</button><br><br><button class="btn cyan darken-1 z-depth-1" onclick="location.href='https://discord.gg/xMVaHBrzu6';">Join the Discord!</button>`
+  }
   
   const refresh_chat = () => {
     var chat_content_container = document.getElementById('chat_content_container')
@@ -237,23 +159,26 @@ const create_load = (id) =>{
   
         var message_user_container = document.createElement('div')
         message_user_container.setAttribute('class', 'message_user_container')
-        message_user_container.style.cursor = 'pointer'
   
         var message_user = document.createElement('div')
         message_user.setAttribute('class', 'message_user')
-        message_user.innerHTML = `<img src="${avatar}" style="width: 18px; height: 18px; border-radius: 50%;"><username style="margin-top: -21px; margin-left: 20px;">${name}</username>`
+        message_user.innerHTML = `<img src="${avatar}" style="width: 18px; height: 18px; border-radius: 50%;"><username style="margin-top: -21px; margin-left: 20px; cursor: pointer;">${name}</username>`
   
         var message_content_container = document.createElement('div')
         message_content_container.setAttribute('class', 'message_content_container')
   
-        if(validURL(message)) {
+        if(validIMG(message)){
           var message_content = document.createElement('div')
           message_content.setAttribute('class', 'message_content')
-          message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer; margin-top: 15px;" onclick="location.href='${validURL}'">${message}</p>\n<div class="message_embed"><iframe src="https://verbose.crispychat.tech/?url_src=${message}&size=40" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
-        } else {
+          message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer;" onclick="location.href='${message}'">${message}</a>\n<div class="message_embed"><iframe style="height: ${imgtagheight};" src="https://verbose.crispychat.tech/?url_src=${message}&size=40" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
+        } else if(validURL(message)){
+          var message_content = document.createElement('div')
+          message_content.setAttribute('class', 'message_content')
+          message_content.innerHTML = `<p style="text-decoration: underline; cursor: pointer;" onclick="location.href='${message}'">${message}</a>\n<div class="message_embed"><iframe style="height: ${imgtagheight};" src="https://verbose.crispychat.tech/?url_src=${message}&size=40" style="height: 256px; width: 100%;" frameborder="0"></iframe></div>`;
+        }else{
           var message_content = document.createElement('p')
           message_content.setAttribute('class', 'message_content')
-          message_content.innerHTML = `<p style="margin-top: 16px;">${message}</p>`;
+          message_content.textContent = `${message}`;
         }
   
         message_user_container.append(message_user)
@@ -266,3 +191,4 @@ const create_load = (id) =>{
       chat_content_container.scrollTop = chat_content_container.scrollHeight;
     })
   }
+  

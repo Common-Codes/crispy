@@ -4,10 +4,16 @@ const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
 const accountDetails = document.querySelector('.account-details');
 const accountBadges = document.getElementById('badge-location');
-const currentGuildDisplay = document.getElementById('chat_inner_container');
 let nameVar = ''
-let guildVar = ''
+const wwidth = window.innerWidth;
+let imgtagheight = ''
 let profileVar = ''
+
+if(wwidth > '915'){
+  imgtagheight = '155px'
+} else{
+  imgtagheight = '133px'
+}
 
 const setupBadges = (user) => {
   if(user){
@@ -51,22 +57,30 @@ const setupUI = (user) => {
 const setupGuilds = (data) => {
 
   if(data.length){
-    navBar.style.display = 'block'
-    let html = '';
-    data.forEach(doc => {
-      const guild = doc.data();
-      const li = `
-        <li>
-          <button alt="${guild.title}" title="${guild.title}" style="display: block; color: #000; padding; 8px 16px;" onclick="${guild.display}"><img alt="${guild.title}" src="${guild.img}" style="width: 48px; height: 48px;"></button>
-        </li>
-      `;
-      html += li;
+    store.collection('users').doc(auth.currentUser.uid).collection('joined').get().then(snapshot => {
+      setupJoinedGuilds(snapshot.docs);
     });
-    guildList.innerHTML = html
-  } else {
+  } else{
+    return;
+  }
+};
+
+const setupJoinedGuilds = (data) => {
+  if(data.length){
+    navBar.style.display = 'block'
+    let html = ``
+    data.forEach(doc => {
+      const guild = doc.data().id;
+      store.collection('guilds').where("uid", "==", guild).get().then((querySnaphot) => {
+        querySnaphot.forEach((doc) => {
+          const groode = doc.data();
+          guildList.innerHTML += `<li><div><button title="${groode.title}" style="display: block; color: #000; padding; 8px 16px;" onclick="location.href='?g=${groode.uid}';"><img alt="${groode.title}" src="${groode.img}" style="width: 48px; height: 48px;"></button></div></li>`;
+        })
+      })
+    })
+  } else{
     guildList.style.display = 'none'
     navBar.style.display = 'none'
-    
   }
 };
 
