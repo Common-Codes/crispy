@@ -116,3 +116,40 @@
     border-left: 6px solid #E9FFF9;
     border-right: 6px solid #E9FFF9;
   }
+  .menu {
+    width: 120px;
+    z-index: 1;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    display: none;
+    transition: 0.2s display ease-in;
+  }
+  .menu .menu-options {
+    list-style: none;
+    padding: 10px 0;
+    z-index: 1;
+  }
+  .menu .menu-options .menu-option {
+    color: white;
+    font-weight: 500;
+    z-index: 1;
+    font-size: 14px;
+    padding: 10px 40px 10px 20px;
+    cursor: pointer;
+  }
+  .menu .menu-options .menu-option:hover {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  @keyframes move {
+    from {
+      transform: translate(0%);
+    }
+    50% {
+      transform: translate(-40%);
+    }
+    to {
+      transform: transform(0%);
+    }
+  }

@@ -3,6 +3,8 @@ const userDetails = document.querySelector('.ext-account-details');
 const userBadges = document.getElementById('ext-badge-location');
 
 document.addEventListener('click', (e) => {
+    if(menuVisible)toggleMenu("hide");
+    e.preventDefault();
     let element = e.target;
     if(element.tagName == "USERNAME"){
         userBadges.innerHTML = '';
@@ -21,7 +23,6 @@ document.addEventListener('click', (e) => {
                     doc.forEach(bad => {
                         const badder = `${bad.data().badge}`
                         userBadges.innerHTML += badder;
-                        
                     })
                 })
                 M.Modal.getInstance(userDisplay).open();

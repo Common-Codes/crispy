@@ -1,7 +1,9 @@
+const copyInvite = document.getElementById("copyInvite");
 const fragment = new URLSearchParams(window.location.search.slice(1));
 const guildUid = fragment.get('g');
 const currentGuildDisplay = document.getElementById('chat_inner_container');
 let guildVar = ''
+let invStr3 = ``
 
 // Validating URL's with regex
 const validIMG = (str) =>{
@@ -44,7 +46,7 @@ const create_load = (id) =>{
     var ref = firebase.database().ref();
   
     ref.on("value", function(snapshot) {
-      console.log("WSS: Success");
+      console.info("ws://crispychat.tech/app//ws");
     }, function (error) {
       console.log("Error: " + error.code);
     });
@@ -192,3 +194,25 @@ const create_load = (id) =>{
     })
   }
   
+  copyInvite.addEventListener('click', function(event) {
+    store.collection("guilds").where("uid", "==", guildUid).get().then((querySnaphot) => {
+      querySnaphot.forEach((doc) => {
+        invStr3 = `https://crispychat.tech/app/invite/?code=${doc.data().invite}&expire=3873025738000`
+      })
+    })
+    setTimeout(function(){copyText()}, 100)
+  })
+  function copyText() {
+    const invitation = `${invStr3}`;
+    const one = document.createElement("textarea");
+    one.setAttribute('id', 'javascriptChallenge');
+    one.style.display = 'none';
+    one.innerText = invitation;
+    one.value = invitation;
+    one.setSelectionRange(0, 99999);
+
+    one.select();
+    navigator.clipboard.writeText(one.value);
+    window.alert("Invite Copied!")
+  }
+

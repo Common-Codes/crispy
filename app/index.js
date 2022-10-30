@@ -1,3 +1,4 @@
+const menu = document.querySelector(".menu");
 const guildList = document.getElementById("guild-nav");
 const navBar = document.getElementById("navbar");
 const loggedOutLinks = document.querySelectorAll('.logged-out');
@@ -8,6 +9,7 @@ let nameVar = ''
 const wwidth = window.innerWidth;
 let imgtagheight = ''
 let profileVar = ''
+let menuVisible = false;
 
 if(wwidth > '915'){
   imgtagheight = '155px'
@@ -74,7 +76,7 @@ const setupJoinedGuilds = (data) => {
       store.collection('guilds').where("uid", "==", guild).get().then((querySnaphot) => {
         querySnaphot.forEach((doc) => {
           const groode = doc.data();
-          guildList.innerHTML += `<li><div><button title="${groode.title}" style="display: block; color: #000; padding; 8px 16px;" onclick="location.href='?g=${groode.uid}';"><img alt="${groode.title}" src="${groode.img}" style="width: 48px; height: 48px;"></button></div></li>`;
+          guildList.innerHTML += `<li><div><guild title="${groode.title}" style="display: block; color: #000; padding; 8px 16px;" onclick="location.href='?g=${groode.uid}';"><img alt="${groode.title}" src="${groode.img}" style="width: 48px; height: 48px;"></guild></div></li>`;
         })
       })
     })
@@ -83,6 +85,30 @@ const setupJoinedGuilds = (data) => {
     navBar.style.display = 'none'
   }
 };
+
+const toggleMenu = command => {
+  menu.style.display = command === "show" ? "block" : "none";
+  menuVisible = !menuVisible;
+};
+
+const setPosition = ({ top, left }) => {
+  menu.style.left = `${left}px`;
+  menu.style.top = `${top}px`;
+  toggleMenu("show");
+};
+
+window.addEventListener("contextmenu", e => {
+  let element = e.target;
+  if(element.tagName == "GUILD" || element.tagName == "IMG"){
+    e.preventDefault();
+    const origin = {
+      left: e.pageX,
+      top: e.pageY
+    };
+    setPosition(origin);
+    return false;
+  }
+});
 
 document.addEventListener('DOMContentLoaded', function() {
 
