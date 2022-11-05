@@ -4,7 +4,6 @@ const userBadges = document.getElementById('ext-badge-location');
 
 document.addEventListener('click', (e) => {
     if(menuVisible)toggleMenu("hide");
-    e.preventDefault();
     let element = e.target;
     if(element.tagName == "USERNAME"){
         userBadges.innerHTML = '';

@@ -78,7 +78,7 @@
   <div id="modal-login" class="modal">
     <div class="modal-content">
       <h4>Login</h4><br />
-      <p id="errtext"> </p>
+      <p id="errtext" style="color: rgb(205, 50, 50);"></p>
       <form id="login-form">
         <div class="input-field">
           <input type="email" id="login-email" required />
@@ -103,10 +103,10 @@
       <form id="reauth-form">
         <div class="input-field">
           <input type="password" id="reauth-password" required />
-          <label for="login-password">Your password</label>
+          <label for="reauth-password">Confirm your password</label>
         </div>
         <div class="modal-content">
-          <p style="color: red;">By continuing, you're agreeing to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.<br><br>By deleting your account, you agree that we cannot in any way restore your data. Your email, hashed password and profile (including profile image, badges, etc) will be deleted permanently. Your messages will stay visible under your previous account username with server-cached profile image.</p>
+          <p style="color: red;">By deleting your account, you agree that we cannot in any way restore your data. Your email, hashed password and profile (including profile image, badges, etc) will be deleted permanently.<br>By continuing this operation, you're also agreeing to our <span style="text-decoration: underline;  cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Terms%20of%20Service.md';">Terms of Service</span> and <span style="text-decoration: underline; cursor: pointer;" onclick="location.href = 'https://github.com/Common-Codes/crispy/blob/main/legal/Privacy%20Policy.md';">Privacy Policy</span>.<br>Your messages will stay visible under your previous account username with server-side cached version of your profile image.</p>
         </div>
         <button class="btn btn-primary z-depth-0">Authenticate</button>
       </form>

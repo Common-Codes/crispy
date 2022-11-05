@@ -36,6 +36,7 @@ auth.createUserWithEmailAndPassword(email, password).then(cred => {
   const modal = document.querySelector('#modal-signup');
   M.Modal.getInstance(modal).close();
   signupForm.reset();
+  setTimeout(function(){location.reload()}, 1900);
 })
 });
 
@@ -59,7 +60,10 @@ auth.signInWithEmailAndPassword(email, password).then((cred) => {
   const modal = document.querySelector('#modal-login');
   M.Modal.getInstance(modal).close();
   loginForm.reset();
-}).then(function(){location.reload()}, 5000);
+  setTimeout(function(){location.reload()}, 2000);
+}).catch((error) => {
+  document.getElementById("errtext").innerText = `${error}`
+})
 });
 
 function reAuthenticate() {
