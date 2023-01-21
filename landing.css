@@ -3,6 +3,10 @@ body{
     color: black;
 }
 
+h1, h2, h3, h4 {
+  cursor: default;
+}
+
 button {
     font-family: 'Nunito', sans-serif;
     font-weight: 700;
@@ -68,6 +72,7 @@ button {
 }
 
 .link-1naFFL {
+  color: #003945;
   cursor:pointer;
   text-decoration: none
 }
@@ -91,7 +96,7 @@ button {
     text-transform: uppercase;
     text-decoration: none;
     outline: 0;
-    background: #4fd671;
+    background: #003945;
     width: 10%;
     height: 10%;
     border: 0;
@@ -100,4 +105,21 @@ button {
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
+}
+
+#login-button:hover {
+  background: #005fbf;
+}
+
+.appButton-2_tWQ1 {
+  padding: 12px;
+}
+
+underline {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }

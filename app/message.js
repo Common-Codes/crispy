@@ -76,7 +76,7 @@ const create_load = (id) =>{
         const gday = doc.data();
         guildVar = `${gday.uid}`;
         document.getElementById('guild-title-display').innerText = `${gday.title}`;
-        document.title = `Nightly | ${gday.title}`
+        document.title = `Crispy | ${gday.title}`
         html = 
         `
         <div id="chat_content_container"></div>
@@ -84,7 +84,7 @@ const create_load = (id) =>{
           <input type="text" id="chat_input" />
           <label for="chat_input">Send Message</label>
           <div id="chat_input_send">
-            <button id="chat_attachments" style="display: block; border: none; width: 20px; height: 20px; position: relative; top: -44px; left: -29px;" disabled><img src="https://www.svgrepo.com/show/16233/upload.svg"></button>
+            <button id="chat_attachments" style="display: block; border: none; width: 20px; height: 20px; position: relative; top: -44px; left: -29px;" disabled><img style="width: 20px; height: 20px;" src="https://www.svgrepo.com/show/16233/upload.svg"></button>
           </div>
         </div>
         `
